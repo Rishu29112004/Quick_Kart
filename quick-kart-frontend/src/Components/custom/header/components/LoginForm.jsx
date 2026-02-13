@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./validations/login.schema";
 import { authService } from "../../../services/auth.service";
 
-const LoginForm = ({ setOpenLogin, handleSignup, handleSubmit }) => {
+const LoginForm = ({ setOpenLogin, handleSignup }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -28,6 +28,7 @@ const LoginForm = ({ setOpenLogin, handleSignup, handleSubmit }) => {
       }
 
       // handleSubmit?.();
+      setOpenLogin(false)
     } catch (error) {
       const message =
         error?.response?.data?.message || error?.message || "Login failed";

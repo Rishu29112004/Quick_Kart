@@ -21,11 +21,10 @@ const Header = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [user, setUser] = useState(null);
   const isLoggedIn = !!user;
+  const dropdownRef = useRef(null);
 
   const { cartItem } = useContext(CartContext);
 
-  console.log("userDetails:", user);
-  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -41,6 +40,7 @@ const Header = () => {
     fetchUser();
   }, []);
 
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -52,17 +52,6 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSubmit = async () => {
-    try {
-      const res = await authService.me();
-      setUser(res.data.data);
-      setSignup(false);
-      setOpenLogin(false);
-      setProfileOpen(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const handleLogin = () => {
     setSignup(false);
@@ -70,7 +59,7 @@ const Header = () => {
     setMenuOpen(false);
   };
 
-  const handleSignup = () => {
+   const handleSignup = () => {
     setOpenLogin(false);
     setSignup(true);
   };
@@ -275,19 +264,9 @@ const Header = () => {
       )}
 
       {/* Modals */}
-      {signup && (
-        <SignupForm
-          handleSubmit={handleSubmit}
-          handleLogin={handleLogin}
-          setSignup={setSignup}
-        />
-      )}
+      {signup && <SignupForm handleLogin={handleLogin} setSignup={setSignup} />}
       {openLogin && (
-        <LoginForm
-          handleSignup={handleSignup}
-          setOpenLogin={setOpenLogin}
-          handleSubmit={handleSubmit}
-        />
+        <LoginForm setOpenLogin={setOpenLogin} handleSignup={handleSignup} />
       )}
     </div>
   );

@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import { products } from '../../custom/data/data'
-import { CartContext } from '../../context/CartContext'
+import React, { useContext, useEffect, useRef } from "react";
+import { products } from "../../custom/data/data";
+import { CartContext } from "../../context/CartContext";
 
 const Shop = () => {
-  const { addToCart } = useContext(CartContext)
-
+  const { addToCart } = useContext(CartContext);
+  
   return (
-    <div className='min-h-screen max-w-7xl mx-auto py-5'>
+    <div  className="min-h-screen max-w-7xl mx-auto py-5">
       {/* Heading */}
       <div className="py-6">
         <p className="text-2xl text-gray-700 font-bold">All Products</p>
@@ -48,7 +48,7 @@ const Shop = () => {
                 </p>
               </div>
               <button
-                onClick={() => addToCart(product)}   // ✅ Fixed here
+                onClick={() => addToCart(product)} // ✅ Fixed here
                 className="px-3 py-1 rounded-lg border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition text-sm"
               >
                 Buy now
@@ -58,7 +58,7 @@ const Shop = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;
