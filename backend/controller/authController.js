@@ -122,7 +122,8 @@ export const logout = async (req, res) => {
 
 export const checkAuth= async(req,res)=>{
     try{
-        const userId= req?._id
+        const userId= req?.id
+        console.log("am i getting the user id at here ",userId)
         if(!userId){
             return response(res,400,"Unauthorized, please login to access our page")
         }
